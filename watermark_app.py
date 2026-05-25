@@ -7,7 +7,7 @@ import zipfile
 # ---------------- PAGE CONFIG ---------------- #
 
 st.set_page_config(
-    page_title="Bedsheet Watermark Tool",
+    page_title="Watermark Tool",
     page_icon="✨",
     layout="wide"
 )
@@ -98,7 +98,7 @@ st.markdown(
 
 st.sidebar.header("⚙️ Watermark Settings")
 
-# RESPONSIVE FONT SIZE %
+# RESPONSIVE FONT %
 
 font_percent = st.sidebar.slider(
     "Font Size %",
@@ -138,13 +138,26 @@ opacity = st.sidebar.slider(
     255
 )
 
+# ---------------- FONT SYSTEM ---------------- #
+
+fonts_folder = "Poppins"
+
+font_files = sorted([
+    f for f in os.listdir(fonts_folder)
+    if f.endswith(".ttf")
+])
+
 font_style = st.sidebar.selectbox(
     "Font Style",
-    [
-        "arial.ttf",
-        "arialbd.ttf"
-    ]
+    font_files
 )
+
+selected_font_path = os.path.join(
+    fonts_folder,
+    font_style
+)
+
+# ---------------- POSITION ---------------- #
 
 position_preset = st.sidebar.selectbox(
     "Watermark Position",
@@ -219,14 +232,17 @@ if uploaded_files:
             )
 
             try:
+
                 font = ImageFont.truetype(
-                    font_style,
+                    selected_font_path,
                     current_font_size
                 )
+
             except:
+
                 font = ImageFont.load_default()
 
-            # ---------------- AUTO LONG NAME ADJUST ---------------- #
+            # ---------------- AUTO LONG NAME FIX ---------------- #
 
             if auto_font:
 
@@ -249,7 +265,7 @@ if uploaded_files:
                         break
 
                     font = ImageFont.truetype(
-                        font_style,
+                        selected_font_path,
                         current_font_size
                     )
 
@@ -375,7 +391,7 @@ if uploaded_files:
                 txt_layer
             ).convert("RGB")
 
-            # ---------------- SAVE ---------------- #
+            # ---------------- SAVE IMAGE ---------------- #
 
             img_bytes = io.BytesIO()
 
