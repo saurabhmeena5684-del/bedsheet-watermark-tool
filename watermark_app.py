@@ -87,10 +87,10 @@ img{
 
 # ---------------- TITLE ---------------- #
 
-st.title("✨ Bedsheet Watermark Tool")
+st.title("✨ Watermark Tool")
 
 st.markdown(
-    '<div class="main-subtitle">Professional Bulk Watermark Tool For Ecommerce Images</div>',
+    '<div class="main-subtitle">Professional Bulk Watermark & Branding Tool</div>',
     unsafe_allow_html=True
 )
 
