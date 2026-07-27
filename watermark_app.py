@@ -578,7 +578,7 @@ if selected_tool == "Watermark Tool":
     if watermark_source in ["Use Custom Text", "Use Multiple Watermarks"]:
         custom_watermark_text = st.sidebar.text_input(
             "Custom Watermark Text",
-            placeholder="e.g., Clay Craft"
+            placeholder="e.g., Sample"
         )
 
     # Show Logo uploader for Logo mode or Multiple Watermarks mode
